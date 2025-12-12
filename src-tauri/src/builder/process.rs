@@ -39,18 +39,20 @@ fn run_ffmpeg(args: &[String]) -> anyhow::Result<()> {
     Ok(())
 }
 
-fn main() {
+fn gen_video() {
 
     let assets_dir = "assets";
     let font_path = format!("{}/MozillaText-VariableFont_wght.ttf", assets_dir);
 
     let filter = FilterChain::new()
+        .scale(1080, 1920, true)
+        .crop_center(1080, 1920)
         .drawtext(font_path, "Hello world", 48, "white", "10", "10", None, None);
 
     let job = Job {
         input_video:  format!("{}/video.mp4", assets_dir),
         input_images: None,
-        input_audio: None,
+        input_audio: None, 
         filter,
         codec: VideoCodec::H264,
         preset: Preset::Fast,

@@ -7,20 +7,23 @@ pub struct FilterChain {
 impl FilterChain {
     pub fn new() -> Self { Self::default() }
 
-    pub fn raw<S: Into<String>>(mut self, filter: S) {
+    pub fn raw<S: Into<String>>(mut self, filter: S) -> Self {
         self.parts.push(filter.into());
+        self
     }
 
-    pub fn scale(mut self, w: u32, h: u32, keep_ratio: bool) {
+    pub fn scale(mut self, w: u32, h: u32, keep_ratio: bool) -> Self {
         let mut s = format!("scale={}:{}", w, h);
         if keep_ratio {
             s.push_str(":force_original_aspect_ratio=increase");
         }
         self.parts.push(s);
+        self
     }
 
-    pub fn crop_center(mut self, w: u32, h: u32) {
+    pub fn crop_center(mut self, w: u32, h: u32) -> Self {
         self.parts.push(format!("crop={}:{}", w, h));
+        self
     }
 
     pub fn drawtext(
