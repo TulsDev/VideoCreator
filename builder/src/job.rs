@@ -1,8 +1,6 @@
 
-use std::path::{Path, PathBuf};
 use crate::filter::FilterChain;
 
-/// Codec vidéo supportés (facultatif mais pratique)
 #[derive(Debug, Clone, Copy)]
 pub enum VideoCodec {
     H264,
@@ -20,8 +18,7 @@ impl VideoCodec {
     }
 }
 
-/// Preset d’encodage (x264/h264_nvenc, etc.)
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug,Clone,Copy)]
 pub enum Preset {
     Ultrafast,
     Superfast,
@@ -53,10 +50,10 @@ impl Preset {
 #[derive(Debug)]
 pub struct Job {
     pub input_video: String,
-    pub input_images: Option<Vec<String>>,        // logos, watermarks…
-    pub input_audio: Option<String>,      // musique / voix off
+    pub input_images: Option<Vec<String>>,        
+    pub input_audio: Option<String>,      
 
-    pub filter: FilterChain,                // le graphe complet
+    pub filter: FilterChain,                
 
     pub codec: VideoCodec,
     pub preset: Preset,
@@ -107,9 +104,6 @@ pub fn job_to_args(job: &Job) -> Vec<String> {
         args.push("-c:a".into());
         args.push("copy".into());
     }
-
-    // args.push("-movflags".into());
-    // args.push("+faststart".into());
 
     args.push(job.output.clone());
 

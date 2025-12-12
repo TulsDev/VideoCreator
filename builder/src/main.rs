@@ -6,7 +6,6 @@ use std::io::{BufRead, BufReader};
 use std::process::{Command, Stdio};
 use filter::FilterChain;
 use job::{Job,job_to_args,Preset,VideoCodec};
-use std::path::PathBuf;
 
 fn run_ffmpeg(args: &[String]) -> anyhow::Result<()> {
     
@@ -40,35 +39,7 @@ fn run_ffmpeg(args: &[String]) -> anyhow::Result<()> {
     Ok(())
 }
 
-fn s(s: &str) -> String {
-    String::from(s)
-}
-
 fn main() {
-
-    // let args = [
-    //     s("-y"),
-        
-    //     s("-i"),
-    //     s("assets/video.mp4"),
-
-    //     s("-filter:v"),
-    //     s("
-    //     scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,
-    //     drawtext=fontfile=/assets/Mozilla_Text/MozillaText-VariableFont_wght.ttf:text='Hello World!':fontsize=48:fontcolor=white:x=0:y=0,
-    //     "),
-
-    //     s("-c:v"),
-    //     s("libx264"),
-        
-    //     s("-preset"),
-    //     s("fast"),
-        
-    //     s("-crf"),
-    //     s("23"),
-        
-    //     s("out/final.mp4"),
-    // ];
 
     let assets_dir = "assets";
     let font_path = format!("{}/MozillaText-VariableFont_wght.ttf", assets_dir);
@@ -78,8 +49,8 @@ fn main() {
 
     let job = Job {
         input_video:  format!("{}/video.mp4", assets_dir),
-        input_images: None, // vec![logo_path],
-        input_audio: None, //Some(assets_dir + "music.mp3"), // <- vous pouvez mettre None
+        input_images: None,
+        input_audio: None,
         filter,
         codec: VideoCodec::H264,
         preset: Preset::Fast,
