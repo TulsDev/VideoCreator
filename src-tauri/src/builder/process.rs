@@ -1,11 +1,8 @@
 
-mod filter;
-mod job;
-
 use std::io::{BufRead, BufReader};
 use std::process::{Command, Stdio};
-use filter::FilterChain;
-use job::{Job,job_to_args,Preset,VideoCodec};
+use super::filter::FilterChain;
+use super::job::{Job,job_to_args,Preset,VideoCodec};
 
 fn run_ffmpeg(args: &[String]) -> anyhow::Result<()> {
     
@@ -39,7 +36,7 @@ fn run_ffmpeg(args: &[String]) -> anyhow::Result<()> {
     Ok(())
 }
 
-fn gen_video() {
+pub fn gen_video() {
 
     let assets_dir = "assets";
     let font_path = format!("{}/MozillaText-VariableFont_wght.ttf", assets_dir);
