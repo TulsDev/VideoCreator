@@ -1,6 +1,8 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 mod builder;
+mod services;
+
 use builder::process::gen_video;
 
 #[tauri::command]

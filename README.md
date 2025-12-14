@@ -1,7 +1,9 @@
-# Tauri + React + Typescript
+# Video Generator app from template
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+## The idea: 
 
-## Recommended IDE Setup
+### 1. Create a template in an video-edit-app-like interface
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+### 2. Provide a set of videos, audios and content to add as text (or other format like json,csv...) files.
+
+### 3. Let the app generate videos thanks to ffmpeg
