@@ -6,8 +6,8 @@ use uuid::Uuid;
 pub struct Audio {
     pub id: Uuid,
     pub media_id: Uuid,
-    pub subclip: Option<(u32, u32)>,
-    pub between: Option<(u32, u32)>,
+    pub subclip: (u32, u32),
+    pub between: (u32, u32),
     pub tempo: f64,
     pub volume: f64,
 } 
@@ -16,30 +16,30 @@ impl Audio {
 
     pub fn new(
         media_id: Uuid,
-        subclip: Option<(u32, u32)>,
-        between: Option<(u32, u32)>,
-        tempo: Option<f64>,
-        volume: Option<f64>
+        subclip: (u32, u32),
+        between: (u32, u32),
+        tempo: f64,
+        volume: f64
     ) -> Self {
         Self {
             id: Uuid::new_v4(),
             media_id,
             subclip,
             between,
-            tempo: tempo.unwrap_or(1.0),
-            volume: volume.unwrap_or(1.0)
+            tempo,
+            volume
         }
     }
 
     // Setters
 
     pub fn set_subclip(&mut self, start: u32, duration: u32) -> &mut Self {
-        self.subclip = Some((start, duration));
+        self.subclip = (start, duration);
         self
     }
 
     pub fn set_between(&mut self, start: u32, duration: u32) -> &mut Self {
-        self.between = Some((start, duration));
+        self.between = (start, duration);
         self
     }
 

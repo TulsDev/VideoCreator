@@ -3,49 +3,35 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Video {
+pub struct Image {
     pub id: Uuid,
     pub media_id: Uuid,
-    pub subclip: (u32, u32),
     pub between: (u32, u32),
     pub scale: (i32, i32),
     pub crop: (i32, i32, i32, i32),
     pub pos: (u32, u32),
-    pub speed: f64,
-    pub fps: u32,
-}
+} 
 
-impl Video {
+impl Image {
 
     pub fn new(
         media_id: Uuid,
-        subclip: (u32, u32),
         between: (u32, u32),
         scale: (i32, i32),
         crop: (i32, i32, i32, i32),
         pos: (u32, u32),
-        speed: f64,
-        fps: u32,
     ) -> Self {
         Self {
             id: Uuid::new_v4(),
             media_id,
-            subclip,
             between,
             scale,
             crop,
-            pos,
-            speed,
-            fps
+            pos
         }
     }
 
     // Setters
-
-    pub fn set_subclip(&mut self, start: u32, duration: u32) -> &mut Self {
-        self.subclip = (start, duration);
-        self
-    }
 
     pub fn set_between(&mut self, start: u32, duration: u32) -> &mut Self {
         self.between = (start, duration);
@@ -65,16 +51,6 @@ impl Video {
     pub fn set_pos(&mut self, x: u32, y: u32) -> &mut Self {
         self.pos = (x, y);
         self
-    }
-
-    pub fn set_speed(&mut self, speed: f64) -> &mut Self {
-        self.speed = speed; 
-        self
-    }
-
-    pub fn set_fps(&mut self, fps: u32) -> &mut Self {
-        self.fps = fps.max(1);
-        self
-    }
+    }    
 
 }
